@@ -37,7 +37,7 @@ namespace Mango.Services.ProductAPI.Controllers
             return _response;
         }
 
-        [HttpGet()]
+        [HttpGet]
         [Route("{id}")]
         public async Task<object> Get(int id)
         {
@@ -45,6 +45,54 @@ namespace Mango.Services.ProductAPI.Controllers
             {
                 ProductDto productDto = await _productRepository.GetProduct(id);
                 _response.Result = productDto;
+            }
+            catch (Exception exc)
+            {
+                _response.IsSuccess = false;
+                _response.ErrorMessage = new List<string> { exc.ToString() };
+            }
+            return _response;
+        }
+
+        [HttpPost]
+        public async Task<object> Post([FromBody] ProductDto productDto)
+        {
+            try
+            {
+                ProductDto model = await _productRepository.CreateUpdateProduct(productDto);
+                _response.Result = model;
+            }
+            catch (Exception exc)
+            {
+                _response.IsSuccess = false;
+                _response.ErrorMessage = new List<string> { exc.ToString() };
+            }
+            return _response;
+        }
+
+        [HttpPut]
+        public async Task<object> Put([FromBody] ProductDto productDto)
+        {
+            try
+            {
+                ProductDto model = await _productRepository.CreateUpdateProduct(productDto);
+                _response.Result = model;
+            }
+            catch (Exception exc)
+            {
+                _response.IsSuccess = false;
+                _response.ErrorMessage = new List<string> { exc.ToString() };
+            }
+            return _response;
+        }
+
+        [HttpDelete]
+        public async Task<object> Delete(int id)
+        {
+            try
+            {
+                bool isRemoved = await _productRepository.DeleteProduct(id);
+                _response.Result = isRemoved;
             }
             catch (Exception exc)
             {
