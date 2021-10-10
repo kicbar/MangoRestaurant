@@ -40,12 +40,15 @@
         @((item.Price).ToString("c"))
     </td>
     <td>
-        <a asp-action="ProductEdit" class="btn btn-success w-25" asp-route-productId="@item.ProductId">Edit
+        <a asp-action="ProductEdit" class="btn btn-success w-25" asp-route-productId="@item.ProductId">
+            Edit
         </a>
-        <a asp-action="ProductDelete" class="btn btn-danger w-25" asp-route-productId="@item.ProductId">Delete
+        <a asp-action="ProductDelete" class="btn btn-danger w-25" asp-route-productId="@item.ProductId">
+            Delete
         </a>
     </td>
-</tr>}
+</tr>
+}
         </tbody>
     </table>
 </div>
