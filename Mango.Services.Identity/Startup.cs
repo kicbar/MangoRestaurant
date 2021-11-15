@@ -43,7 +43,7 @@ namespace Mango.Services.Identity
                 options.Events.RaiseSuccessEvents = true;
             }).AddInMemoryIdentityResources(SD.IdentityResources)
                 .AddInMemoryApiScopes(SD.ApiScopes)
-                .AddTestUsers(TestUsers.Users)
+                //.AddTestUsers(TestUsers.Users)
                 .AddInMemoryClients(SD.Clients)
                 .AddAspNetIdentity<ApplicationUser>();
 
