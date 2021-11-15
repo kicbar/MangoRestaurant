@@ -1,3 +1,4 @@
+using IdentityServerHost.Quickstart.UI;
 using Mango.Services.Identity.DbContexts;
 using Mango.Services.Identity.Initializer;
 using Mango.Services.Identity.Models;
@@ -42,6 +43,7 @@ namespace Mango.Services.Identity
                 options.Events.RaiseSuccessEvents = true;
             }).AddInMemoryIdentityResources(SD.IdentityResources)
                 .AddInMemoryApiScopes(SD.ApiScopes)
+                .AddTestUsers(TestUsers.Users)
                 .AddInMemoryClients(SD.Clients)
                 .AddAspNetIdentity<ApplicationUser>();
 

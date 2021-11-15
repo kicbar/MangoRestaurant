@@ -43,6 +43,7 @@ namespace Mango.Web
                     options.TokenValidationParameters.RoleClaimType = "role";
                     options.Scope.Add("mango");
                     options.SaveTokens = true;
+
                 });
         }
 
