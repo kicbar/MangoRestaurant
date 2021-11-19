@@ -2,6 +2,8 @@
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
+    <AssemblyName>Mango.Services.ShoppingCardAPI</AssemblyName>
+    <RootNamespace>Mango.Services.ShoppingCardAPI</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
