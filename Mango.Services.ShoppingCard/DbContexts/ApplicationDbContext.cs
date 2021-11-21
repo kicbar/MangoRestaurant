@@ -12,7 +12,5 @@ namespace Mango.Services.ShoppingCard.DbContexts
         public DbSet<Product> Products { get; set; }
         public DbSet<CartHeader> CartHeader { get; set; }
         public DbSet<CartDetails> CartDetails { get; set; }
-
-
     }
 }
