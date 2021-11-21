@@ -2,7 +2,7 @@
 
 namespace Mango.Services.ShoppingCardAPI.Models
 {
-    public class CartDetail
+    public class CartDetails
     {
         public int CartDetailsId { get; set; }
         public int CartHeaderId { get; set; }
