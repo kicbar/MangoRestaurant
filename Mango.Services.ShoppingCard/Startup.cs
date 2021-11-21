@@ -1,21 +1,17 @@
 using AutoMapper;
 using Mango.Services.ShoppingCard.DbContexts;
 using Mango.Services.ShoppingCard.Mappings;
+using Mango.Services.ShoppingCardAPI.Repository;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Mango.Services.ShoppingCard
 {
@@ -36,7 +32,8 @@ namespace Mango.Services.ShoppingCard
             IMapper mapper = MappingConfig.RegisterMaps().CreateMapper();
             services.AddSingleton(mapper);
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
-            //services.AddScoped<IProductRepository, ProductRepository>();
+            
+            services.AddScoped<ICartRepository, CartRepository>();
 
             services.AddControllers();
 
