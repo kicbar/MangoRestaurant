@@ -25,6 +25,7 @@ namespace Mango.Web
             SD.ShoppingCardAPIBase = Configuration["ServiceUrls:ShoppingCardAPI"];
 
             services.AddScoped<IProductService, ProductService>();
+            services.AddScoped<ICartService, CartService>();
             services.AddControllersWithViews();
 
             services.AddAuthentication(options =>
