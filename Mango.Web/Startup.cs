@@ -21,11 +21,14 @@ namespace Mango.Web
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddHttpClient<IProductService, ProductService>();
+            services.AddHttpClient<ICartService, CartService>();
+
             SD.ProductAPIBase = Configuration["ServiceUrls:ProductAPI"];
             SD.ShoppingCardAPIBase = Configuration["ServiceUrls:ShoppingCardAPI"];
 
             services.AddScoped<IProductService, ProductService>();
             services.AddScoped<ICartService, CartService>();
+
             services.AddControllersWithViews();
 
             services.AddAuthentication(options =>
@@ -45,7 +48,6 @@ namespace Mango.Web
                     options.TokenValidationParameters.RoleClaimType = "role";
                     options.Scope.Add("mango");
                     options.SaveTokens = true;
-
                 });
         }
 

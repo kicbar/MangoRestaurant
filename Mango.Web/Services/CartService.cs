@@ -1,32 +1,60 @@
 ﻿using Mango.Web.Models;
 using Mango.Web.Services.IServices;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+using System.Net.Http;
 using System.Threading.Tasks;
 
 namespace Mango.Web.Services
 {
-    public class CartService : ICartService
+    public class CartService : BaseService, ICartService
     {
-        public Task<T> AddToCartAsync<T>(CartDto cartDto, string token = null)
+        private readonly IHttpClientFactory _clientFactory;
+
+        public CartService(IHttpClientFactory clientFactory) : base(clientFactory)
         {
-            throw new NotImplementedException();
+            _clientFactory = clientFactory;
         }
 
-        public Task<T> GetCartByUserIdAsync<T>(string userId, string token = null)
+        public async Task<T> AddToCartAsync<T>(CartDto cartDto, string token = null)
         {
-            throw new NotImplementedException();
+            return await this.SendAsync<T>(new ApiRequest()
+            {
+                ApiType = SD.ApiType.POST,
+                Data = cartDto,
+                Url = SD.ShoppingCardAPIBase + "api/cart/AddCart",
+                AccessToken = token
+            });
         }
 
-        public Task<T> RemoveFromCartAsync<T>(int cartId, string token = null)
+        public async Task<T> GetCartByUserIdAsync<T>(string userId, string token = null)
         {
-            throw new NotImplementedException();
+            return await this.SendAsync<T>(new ApiRequest()
+            {
+                ApiType = SD.ApiType.GET,
+                Url = SD.ShoppingCardAPIBase + "api/cart/GetCart/" + userId,
+                AccessToken = token
+            });
         }
 
-        public Task<T> UpdateCartAsync<T>(CartDto cartDto, string token = null)
+        public async Task<T> RemoveFromCartAsync<T>(int cartId, string token = null)
         {
-            throw new NotImplementedException();
+            return await this.SendAsync<T>(new ApiRequest()
+            {
+                ApiType = SD.ApiType.POST,
+                Data = cartId,
+                Url = SD.ShoppingCardAPIBase + "api/cart/RemoveCart",
+                AccessToken = token
+            });
+        }
+
+        public async Task<T> UpdateCartAsync<T>(CartDto cartDto, string token = null)
+        {
+            return await this.SendAsync<T>(new ApiRequest()
+            {
+                ApiType = SD.ApiType.POST,
+                Data = cartDto,
+                Url = SD.ShoppingCardAPIBase + "api/cart/UpdateCart",
+                AccessToken = token
+            });
         }
     }
 }
