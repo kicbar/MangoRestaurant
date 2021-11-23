@@ -20,15 +20,6 @@ namespace Mango.Services.ShoppingCardAPI.Repository
             _mapper = mapper;
         }
 
-        public async Task<bool> ApplyCoupon(string userId, string couponCode)
-        {
-            var cartFromDb = await _db.CartHeader.FirstOrDefaultAsync(u => u.UserId == userId);
-            cartFromDb.CouponCode = couponCode;
-            _db.CartHeader.Update(cartFromDb);
-            await _db.SaveChangesAsync();
-            return true;
-        }
-
         public async Task<bool> ClearCart(string userId)
         {
             var cartHeaderFromDb = await _db.CartHeader.FirstOrDefaultAsync(u => u.UserId == userId);
@@ -39,14 +30,12 @@ namespace Mango.Services.ShoppingCardAPI.Repository
                 _db.CartHeader.Remove(cartHeaderFromDb);
                 await _db.SaveChangesAsync();
                 return true;
-
             }
             return false;
         }
 
         public async Task<CartDto> CreateUpdateCart(CartDto cartDto)
         {
-
             Cart cart = _mapper.Map<Cart>(cartDto);
 
             //check if product exists in database, if not create it!
@@ -58,7 +47,6 @@ namespace Mango.Services.ShoppingCardAPI.Repository
                 _db.Products.Add(cart.CartDetails.FirstOrDefault().Product);
                 await _db.SaveChangesAsync();
             }
-
 
             //check if header is null
             var cartHeaderFromDb = await _db.CartHeader.AsNoTracking()
@@ -95,15 +83,12 @@ namespace Mango.Services.ShoppingCardAPI.Repository
                     //update the count / cart details
                     cart.CartDetails.FirstOrDefault().Product = null;
                     cart.CartDetails.FirstOrDefault().Count += cartDetailsFromDb.Count;
-                    cart.CartDetails.FirstOrDefault().CartDetailsId = cartDetailsFromDb.CartDetailsId;
-                    cart.CartDetails.FirstOrDefault().CartHeaderId = cartDetailsFromDb.CartHeaderId;
                     _db.CartDetails.Update(cart.CartDetails.FirstOrDefault());
                     await _db.SaveChangesAsync();
                 }
             }
 
             return _mapper.Map<CartDto>(cart);
-
         }
 
         public async Task<CartDto> GetCartByUserId(string userId)
@@ -117,15 +102,6 @@ namespace Mango.Services.ShoppingCardAPI.Repository
                 .Where(u => u.CartHeaderId == cart.CartHeader.CartHeaderId).Include(u => u.Product);
 
             return _mapper.Map<CartDto>(cart);
-        }
-
-        public async Task<bool> RemoveCoupon(string userId)
-        {
-            var cartFromDb = await _db.CartHeader.FirstOrDefaultAsync(u => u.UserId == userId);
-            cartFromDb.CouponCode = "";
-            _db.CartHeader.Update(cartFromDb);
-            await _db.SaveChangesAsync();
-            return true;
         }
 
         public async Task<bool> RemoveFromCart(int cartDetailsId)
@@ -154,6 +130,5 @@ namespace Mango.Services.ShoppingCardAPI.Repository
                 return false;
             }
         }
-
     }
 }

@@ -27,7 +27,6 @@ namespace Mango.Services.ShoppingCardAPI.Controllers
             {
                 CartDto cartDto = await _cartRepository.GetCartByUserId(userId);
                 _responseDto.Result = cartDto;
-
             }
             catch (Exception ex)
             {
@@ -37,14 +36,13 @@ namespace Mango.Services.ShoppingCardAPI.Controllers
             return _responseDto;
         }
 
-        [HttpGet("AddCart")]
+        [HttpPost("AddCart")]
         public async Task<object> AddCart(CartDto cartDto)
         {
             try
             {
                 CartDto cart = await _cartRepository.CreateUpdateCart(cartDto);
                 _responseDto.Result = cart;
-
             }
             catch (Exception ex)
             {
@@ -61,7 +59,6 @@ namespace Mango.Services.ShoppingCardAPI.Controllers
             {
                 CartDto cart = await _cartRepository.CreateUpdateCart(cartDto);
                 _responseDto.Result = cart;
-
             }
             catch (Exception ex)
             {
@@ -78,7 +75,6 @@ namespace Mango.Services.ShoppingCardAPI.Controllers
             {
                 bool isSuccess = await _cartRepository.RemoveFromCart(detailsId);
                 _responseDto.Result = isSuccess;
-
             }
             catch (Exception ex)
             {

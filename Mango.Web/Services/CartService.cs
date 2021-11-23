@@ -15,9 +15,10 @@ namespace Mango.Web.Services
         }
 
         public async Task<T> AddToCartAsync<T>(CartDto cartDto, string token = null)
-        {
+        {;
             return await this.SendAsync<T>(new ApiRequest()
             {
+
                 ApiType = SD.ApiType.POST,
                 Data = cartDto,
                 Url = SD.ShoppingCardAPIBase + "api/cart/AddCart",
