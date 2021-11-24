@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Mango.Web.Models
+namespace Mango.Services.CouponAPI.Models.Dtos
 {
     public class ResponseDto
     {

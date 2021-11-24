@@ -1,4 +1,6 @@
 ﻿using AutoMapper;
+using Mango.Services.CouponAPI.Models;
+using Mango.Services.CouponAPI.Models.Dtos;
 
 namespace Mango.Services.CouponAPI.Mappings
 {
@@ -7,7 +9,7 @@ namespace Mango.Services.CouponAPI.Mappings
         public static MapperConfiguration RegisterMaps()
         {
             var mappingConfig = new MapperConfiguration(config => {
-                //config.CreateMap<ProductDto, Product>().ReverseMap();
+                config.CreateMap<CouponDto, Coupon>().ReverseMap();
             });
 
             return mappingConfig;
