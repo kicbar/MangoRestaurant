@@ -1,6 +1,8 @@
 using AutoMapper;
 using Mango.Services.CouponAPI.DbContexts;
 using Mango.Services.CouponAPI.Mappings;
+using Mango.Services.CouponAPI.Repository;
+using Mango.Services.CouponAPI.Repository.IRepository;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -32,7 +34,7 @@ namespace Mango.Services.CouponAPI
             services.AddSingleton(mapper);
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
-            //services.AddScoped<ICartRepository, CartRepository>();
+            services.AddScoped<ICouponRepository, CouponRepository>();
 
             services.AddControllers();
 
