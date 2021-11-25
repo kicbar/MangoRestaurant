@@ -21,6 +21,7 @@ namespace Mango.Web.Controllers
             _couponService = couponService;
             _productService = productService;
         }
+
         public async Task<IActionResult> CartIndex()
         {
             return View(await LoadCartDtoBasedOnLoggedInUser());
@@ -67,6 +68,12 @@ namespace Mango.Web.Controllers
                 return RedirectToAction(nameof(CartIndex));
             }
             return View();
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Checkout()
+        {
+            return View(await LoadCartDtoBasedOnLoggedInUser());
         }
 
         private async Task<CartDto> LoadCartDtoBasedOnLoggedInUser()
