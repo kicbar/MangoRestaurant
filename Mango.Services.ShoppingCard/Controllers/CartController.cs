@@ -83,5 +83,37 @@ namespace Mango.Services.ShoppingCardAPI.Controllers
             }
             return _responseDto;
         }
+
+        [HttpPost("ApplyCoupon")]
+        public async Task<object> ApplyCoupon([FromBody] CartDto cartDto)
+        {
+            try
+            {
+                bool isSuccess = await _cartRepository.ApplyCoupon(cartDto.CartHeader.UserId, cartDto.CartHeader.CouponCode);
+                _responseDto.Result = isSuccess;
+            }
+            catch (Exception ex)
+            {
+                _responseDto.IsSuccess = false;
+                _responseDto.ErrorMessage = new List<string>() { ex.ToString() };
+            }
+            return _responseDto;
+        }
+
+        [HttpPost("RemoveCoupon")]
+        public async Task<object> RemoveCoupon([FromBody] string userId)
+        {
+            try
+            {
+                bool isSuccess = await _cartRepository.RemoveCoupon(userId);
+                _responseDto.Result = isSuccess;
+            }
+            catch (Exception ex)
+            {
+                _responseDto.IsSuccess = false;
+                _responseDto.ErrorMessage = new List<string>() { ex.ToString() };
+            }
+            return _responseDto;
+        }
     }
 }

@@ -130,5 +130,23 @@ namespace Mango.Services.ShoppingCardAPI.Repository
                 return false;
             }
         }
+
+        public async Task<bool> ApplyCoupon(string userId, string couponCode)
+        {
+            var cartFromDb = await _db.CartHeader.FirstOrDefaultAsync(u => u.UserId == userId);
+            cartFromDb.CouponCode = couponCode;
+            _db.CartHeader.Update(cartFromDb);
+            await _db.SaveChangesAsync();
+            return true;
+        }
+
+        public async Task<bool> RemoveCoupon(string userId)
+        {
+            var cartFromDb = await _db.CartHeader.FirstOrDefaultAsync(u => u.UserId == userId);
+            cartFromDb.CouponCode = "";
+            _db.CartHeader.Update(cartFromDb);
+            await _db.SaveChangesAsync();
+            return true;
+        }
     }
 }
