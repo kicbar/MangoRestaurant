@@ -22,12 +22,15 @@ namespace Mango.Web
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddHttpClient<IProductService, ProductService>();
+            services.AddHttpClient<ICouponService, CouponService>();
             services.AddHttpClient<ICartService, CartService>();
 
+            SD.CouponAPIBase = Configuration["ServiceUrls:CouponAPI"];
             SD.ProductAPIBase = Configuration["ServiceUrls:ProductAPI"];
             SD.ShoppingCardAPIBase = Configuration["ServiceUrls:ShoppingCardAPI"];
 
             services.AddScoped<IProductService, ProductService>();
+            services.AddScoped<ICouponService, CouponService>();
             services.AddScoped<ICartService, CartService>();
 
             services.AddControllersWithViews();
