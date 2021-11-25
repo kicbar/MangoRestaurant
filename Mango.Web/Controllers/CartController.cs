@@ -89,7 +89,7 @@ namespace Mango.Web.Controllers
 
                     if (coupon != null && coupon.IsSuccess)
                     {
-                        var couponDto = JsonConvert.DeserializeObject<CouponDto>(Convert.ToString(response.Result));
+                        var couponDto = JsonConvert.DeserializeObject<CouponDto>(Convert.ToString(coupon.Result));
                         cartDto.CartHeader.DiscountTotal = couponDto.DiscountAmount;
                     }
                 }
