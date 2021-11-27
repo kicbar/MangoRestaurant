@@ -70,7 +70,6 @@ namespace Mango.Web.Controllers
             return View();
         }
 
-        [HttpGet]
         public async Task<IActionResult> Checkout()
         {
             return View(await LoadCartDtoBasedOnLoggedInUser());
@@ -91,7 +90,6 @@ namespace Mango.Web.Controllers
             }
         }
 
-        [HttpGet]
         public async Task<IActionResult> Confirmation()
         {
             return View();
